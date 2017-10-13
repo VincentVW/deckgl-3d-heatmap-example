@@ -759,6 +759,10 @@ d3-request@^1.0.5:
     d3-dsv "1"
     xmlhttprequest "1"
 
+d3@3.5.15:
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/d3/-/d3-3.5.15.tgz#88f6c77716c26ae1d7e233dad0eff284c93d8086"
+
 d@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/d/-/d-1.0.0.tgz#754bb5bfe55451da69a58b94d45f4c5b0462d58f"
@@ -2009,7 +2013,7 @@ lodash.flattendeep@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
 
-lodash@^4.14.0, lodash@^4.17.2:
+lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.4:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 

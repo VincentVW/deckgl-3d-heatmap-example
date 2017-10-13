@@ -9,16 +9,16 @@ import {csv as requestCsv} from 'd3-request';
 import { mapboxApiKey } from './constants';
 
 
-
 // Set your mapbox token here
 const MAPBOX_TOKEN = process.env.MapboxAccessToken; // eslint-disable-line
 
 // Source data GeoJSON
-const DATA_URL = 'static/polygons.json'
+const DATA_URL = 'static/country_polygons.json'
 const LOC_DATA_URL = 'static/points.csv'
 
 
 const colorScale = r => [r * 255, 140, 200 * (1 - r)];
+
 
 class Root extends Component {
 
@@ -76,8 +76,8 @@ class Root extends Component {
         onViewportChange={this._onViewportChange.bind(this)}
         mapboxApiAccessToken={mapboxApiKey}>
         <DeckGLOverlay viewport={viewport}
-          data={data || []}
-          locData={locData || []}
+          data={data}
+          locData={locData}
           colorScale={colorScale} />
       </MapGL>
     );

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {setParameters} from 'luma.gl';
 import DeckGL, {HexagonLayer, GeoJsonLayer} from 'deck.gl';
+import _ from 'lodash';
+import d3 from 'd3'
 
 // const LIGHT_SETTINGS = {
 //   lightsPosition: [-125, 50.5, 5000, -122.8, 48.5, 8000],
@@ -49,9 +51,9 @@ export default class DeckGLOverlay extends Component {
   static get defaultViewport() {
 
     return {
-      longitude: -1.4157267858730052,
+      longitude: 20.4157267858730052,
       latitude: 52.232395363869415,
-      zoom: 6.6,
+      zoom: 3,
       minZoom: 2,
       maxZoom: 15,
       pitch: 40.5,
@@ -76,7 +78,7 @@ export default class DeckGLOverlay extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.locData.length !== this.props.locData.length) {
+    if (nextProps.locData && this.props.locData && (nextProps.locData.length !== this.props.locData.length)) {
       this._animate();
     }
   }
@@ -138,19 +140,28 @@ export default class DeckGLOverlay extends Component {
       return null;
     }
 
+    const maxValue = _.maxBy(data.features, o => o.properties.activity_count).properties.activity_count
+
+    const getColor = d3.scale.linear()
+        .domain([0, maxValue])  
+        .range(["green", "red"]); 
+
     const layers = [
       new GeoJsonLayer({
         id: 'geojson',
         data,
         opacity: 0.8,
-        stroked: false,
-        filled: true,
-        extruded: true,
-        wireframe: true,
-        fp64: true,
+        stroked: true,
+        filled: false,
+        extruded: false,
+        wireframe: false,
+        fp64: false,  
+        lineWidthMinPixels: 2,
+        lineWidthScale: 2,
         getElevation: f => Math.sqrt(f.properties.activity_count) * 10000,
         getFillColor: f => colorScale(f.properties.activity_count),
-        getLineColor: f => [255, 255, 255],
+        getLineColor: f => { const count = f.properties.activity_count ? f.properties.activity_count : 0; const rgb = d3.rgb(getColor(count)); return [rgb.r, rgb.g, rgb.b]},
+        getLineWidth: f => 2000,
         lightSettings: LIGHT_SETTINGS,
         pickable: Boolean(this.props.onHover),
         onHover: this.props.onHover

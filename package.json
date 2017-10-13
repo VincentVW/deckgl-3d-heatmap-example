@@ -6,8 +6,10 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "d3": "3.5.15",
     "d3-request": "^1.0.5",
     "deck.gl": "^4.1.0",
+    "lodash": "^4.17.4",
     "luma.gl": "^4.0.5",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
